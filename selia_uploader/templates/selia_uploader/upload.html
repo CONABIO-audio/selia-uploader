@@ -1,0 +1,69 @@
+{% extends 'selia_templates/base.html' %}
+{% load static %}
+{% load i18n %}
+{% load selia_tags %}
+
+{% block secondary-navbar %}
+  {% include 'selia_uploader/secondary_navbar.html' %}
+{% endblock %}
+
+{% block toolbar-title %}
+  {% trans 'Add items' %}
+{% endblock toolbar-title %}
+
+{% block scripts-extra %}
+{{ block.super }}
+
+<script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.26/moment-timezone-with-data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>
+<script src="https://unpkg.com/wavesurfer.js/dist/wavesurfer.js"></script>
+<script src="https://unpkg.com/wavesurfer.js/dist/plugin/wavesurfer.spectrogram.js"></script>
+
+<script type="text/javascript" src="{% static 'selia_uploader/js/list.js' %}"></script>
+<script type="text/javascript" src="{% static 'selia_uploader/js/upload.js' %}"></script>
+
+<script type="text/javascript">
+
+let started_on = '{{ started_on }}';
+let ended_on = '{{ ended_on }}';
+let item_types = {{ item_types | safe }};
+let tz_info = {{ tz_info | safe }};
+
+window.onbeforeunload = function() {
+   return "Al cambiar de página se perderán las cargas pendientes.";
+};
+
+$(document).ready(function() {
+  var upload_item_form = document.getElementById('upload_item_form');
+  var uploader_section = document.getElementById('uploader_section');
+
+  if (upload_item_form && uploader_section){
+    var uploader = new FileUploader(uploader_section,upload_item_form,item_types,tz_info,started_on,ended_on,"Upload items");
+  }
+});
+</script>
+{% endblock %}
+
+{% block toolbar-steps %}
+  {% include 'selia_uploader/toolbar.html' %}
+{% endblock %}
+
+{% block main-content %}
+  <form id="upload_item_form" action="{% url 'selia_thumbnails:item_upload' %}?sampling_event_device={{ sampling_event_device.pk }}&licence={{ licence.pk }}" method="post" enctype="multipart/form-data" style="display:none;">
+  {% csrf_token %}
+  	<input type="hidden" id="collection_field" name="collection" value="{{ collection.pk }}">
+  	<input type="hidden" id="sampling_event_device_field" name="sampling_event_device" value="{{ sampling_event_device.pk }}">
+  	<input type="hidden" id="licence_field" name="licence" value="{{ licence.pk }}">
+  	<input type="hidden" id="captured_on_year_field" name="captured_on_year" value="">
+  	<input type="hidden" id="captured_on_month_field" name="captured_on_month" value="">
+  	<input type="hidden" id="captured_on_day_field" name="captured_on_day" value="">
+  	<input type="hidden" id="captured_on_hour_field" name="captured_on_hour" value="">
+  	<input type="hidden" id="captured_on_minute_field" name="captured_on_minute" value="">
+   	<input type="hidden" id="captured_on_second_field" name="captured_on_second" value="">
+    <input type="hidden" id="captured_on_timezone_field" name="captured_on_timezone" value="">
+  	<input type="hidden" id="captured_on_field" name="captured_on" value="">
+  </form>
+
+  <div id="uploader_section" class="row justify-content-center" style="width:auto;"></div>
+{% endblock main-content %}

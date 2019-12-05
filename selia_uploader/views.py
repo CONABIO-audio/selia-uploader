@@ -90,8 +90,8 @@ class SeliaUploaderView(TemplateView):
         context["sampling_event_device"] = self.sampling_event_device
         context["sampling_event"] = sampling_event
 
-        context["started_on"] = sampling_event.started_on.strftime('%Y-%m-%d %H:%M:%S')
-        context["ended_on"] = sampling_event.ended_on.strftime('%Y-%m-%d %H:%M:%S')
+        context["started_on"] = self.sampling_event_device.deployed_on.strftime('%Y-%m-%d %H:%M:%S')
+        context["ended_on"] = self.sampling_event_device.recovered_on.strftime('%Y-%m-%d %H:%M:%S')
         context["tz_info"] = get_site_tz_info(site)
 
         return context

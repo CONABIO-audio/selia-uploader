@@ -11,9 +11,13 @@
   {% trans 'Add items' %}
 {% endblock toolbar-title %}
 
+{% block stylesheet %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'selia_uploader/css/main.css' %}">
+{% endblock %}
+
 {% block scripts-extra %}
 {{ block.super }}
-
 <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.26/moment-timezone-with-data.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/exif-js/2.3.0/exif.min.js"></script>

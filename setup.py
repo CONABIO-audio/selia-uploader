@@ -21,6 +21,7 @@ setup(
     install_requires=[
         'irekua-database',
         'irekua-permissions',
+        'irekua-models',
         'irekua-rest-api',
         'selia-templates',
         'selia-thumbnails',

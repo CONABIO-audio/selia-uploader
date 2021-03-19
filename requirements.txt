@@ -31,7 +31,7 @@ MarkupSafe==1.1.1
 more-itertools==7.2.0
 numba==0.46.0
 numpy==1.17.4
-Pillow==6.2.1
+Pillow==8.1.1
 psycopg2-binary==2.8.4
 pycountry==19.8.18
 pycparser==2.19

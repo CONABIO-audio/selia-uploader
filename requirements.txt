@@ -6,7 +6,7 @@ chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
 decorator==4.4.1
-Django==2.2.7
+Django==2.2.20
 django-autocomplete-light==3.4.1
 django-crispy-forms==1.8.1
 django-filter==2.2.0

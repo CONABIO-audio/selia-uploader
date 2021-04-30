@@ -50,6 +50,6 @@ SoundFile==0.10.3.post1
 sqlparse==0.3.0
 timezonefinder==4.1.0
 uritemplate==3.0.0
-urllib3==1.25.7
+urllib3==1.25.8
 zipp==0.6.0
 
